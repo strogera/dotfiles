@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CONFD="/home/void/Programs/wifi-connect/config/"
+
+if [ -z "$1" ];
+then
+	#default config file, or just the most used one
+	CON="/home/void/Programs/wifi-connect/config/xiaomi.conf"
+else
+	#if config name is given
+	CON="${CONFD}$1.conf"
+fi
+
+ip link set wlp3s0 up
+wpa_supplicant -B -i wlp3s0 -c ${CON}
+dhcpcd wlp3s0
+
+echo "config: ${CON}"

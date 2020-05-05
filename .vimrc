@@ -1,21 +1,27 @@
-"path to plug file
 call plug#begin('~\AppData\Local\nvim\plugged\')
 
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-syntastic/syntastic'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'flazz/vim-colorschemes'
+"Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'tpop/vim-markdown'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
+Plug 'morhetz/gruvbox'
+
+"Plug 'shinchu/lightline-gruvbox.vim'
+"Plug 'pablobender/lightline-gruvbox.vim'
 
 call plug#end()
+
+"lightline theme
+let g:lightline = {'colorscheme': 'gruvbox', }
 
 "gvim
 set encoding=utf8
@@ -24,6 +30,14 @@ set bs=2 "fixes backspace for gvim
 "set guifont:Powerline\ Consolas:h17
 set guifont:Hack:h17
 set belloff=all
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
+
+set noswapfile
+set nobackup
+set undodir="~\vimfiles\undodir"
+set undofile
 
 "syntastic settings
 set statusline+=%#warningmsg#
@@ -102,6 +116,7 @@ set statusline +=%5*%{&ff}%*            "file format
 set statusline +=%3*%y%*                "file type
 set statusline +=%4*\ %<%F%*            "full path
 set statusline +=%2*%m%*                "modified flag
+set statusline +=%5l%*             "current line
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
@@ -111,4 +126,4 @@ let g:airline_theme='bubblegum'
 "let g:airline_section_b = '%{getcwd()}'
 let g:airline_section_c = '%t'
 
-colorscheme hybrid_material
+colorscheme gruvbox

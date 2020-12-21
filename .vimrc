@@ -5,7 +5,7 @@ Plug 'junegunn/goyo.vim'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -14,21 +14,22 @@ Plug 'vim-syntastic/syntastic'
 Plug 'tpop/vim-markdown'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'morhetz/gruvbox'
-
+"Plug 'vim-scripts/restore_view.vim'
 "Plug 'shinchu/lightline-gruvbox.vim'
 "Plug 'pablobender/lightline-gruvbox.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
-"lightline theme
-let g:lightline = {'colorscheme': 'gruvbox', }
 
 "gvim
-set encoding=utf8
+set encoding=utf-8
 set bs=2 "fixes backspace for gvim
 "set guifont:DejaVu\ Sans\ Mono\ for\ Powerline:h18
-"set guifont:Powerline\ Consolas:h17
-set guifont:Hack:h17
+set guifont:Consolas:h15
+"set guifont:Hack:h17
 set belloff=all
 set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
@@ -38,6 +39,10 @@ set noswapfile
 set nobackup
 set undodir="~\vimfiles\undodir"
 set undofile
+
+"coc
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "syntastic settings
 set statusline+=%#warningmsg#
@@ -120,10 +125,16 @@ set statusline +=%5l%*             "current line
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
-let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='bubblegum'
 "remove branch
 "let g:airline_section_b = '%{getcwd()}'
-let g:airline_section_c = '%t'
+"let g:airline_section_c = '%t'
 
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_improved_strings=1
+set background=dark
 colorscheme gruvbox
+
+"lightline theme
+let g:lightline = {'colorscheme': 'gruvbox', }

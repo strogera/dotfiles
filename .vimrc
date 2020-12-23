@@ -7,12 +7,12 @@ Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
-Plug 'preservim/nerdtree'
-Plug '907th/vim-auto-save'
+"Plug 'preservim/nerdtree'
+"Plug '907th/vim-auto-save'
 Plug 'vim-syntastic/syntastic'
 
 " Nice to have
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 "makes surround repeatable
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/goyo.vim'
@@ -22,10 +22,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 "Needs compatible font https://github.com/ryanoasis/nerd-fonts
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "vscode colorscheme
 "Plug 'tomasiser/vim-code-dark'
 "Plug 'itchyny/lightline.vim'
@@ -46,8 +46,9 @@ call plug#end()
 set encoding=utf-8
 set bs=2 "fixes backspace for gvim
 "set guifont:DejaVu\ Sans\ Mono\ for\ Powerline:h18
-"set guifont:Consolas:h13
-set guifont:Hack\ NF:h14
+set guifont:Consolas:h13
+"set guifont:Hack:h13
+"set guifont:Hack\ NF:h13
 "let &guifont="Consolas Nerd Font Complete:h16"
 set belloff=all
 set guioptions-=m  "menu bar
@@ -61,29 +62,36 @@ set nobackup
 set undodir="~\vimfiles\undodir"
 set undofile
 
-let g:auto_save = 1  " enable AutoSave on Vim startup
+"let g:auto_save = 1  " enable AutoSave on Vim startup
 "let g:auto_save_silent = 1  " do not display the auto-save notification
+
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+
+"autocmd BufWinEnter * silent :Lex
 
 "completions for vim command
 set wildmode=longest,list,full
 set wildignorecase
 
 "use nerdfont's chars, needs patched font 
-let g:NERDTreeGitStatusUseNerdFonts = 1 
+"let g:NERDTreeGitStatusUseNerdFonts = 1 
 
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
 
 " Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
+"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+"    \ quit | endif
 
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+"let g:NERDTreeDirArrowExpandable = '▸'
+"let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * silent NERDTreeMirror
-
+"autocmd BufWinEnter * silent NERDTreeMirror
+"
 "coc
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -126,7 +134,7 @@ set incsearch
 set ttimeoutlen=100
 set clipboard=unnamed
 
-set noautochdir
+"set noautochdir
 
 "enable numbers {:set nu! to disable for current file)
 set number
@@ -175,7 +183,7 @@ set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
 
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 let g:airline#extensions#branch#enabled = 1
 "remove git branch
@@ -183,16 +191,16 @@ let g:airline#extensions#branch#enabled = 1
 "let g:airline_section_c = '%t'
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
 
 "lightline theme
 "let g:lightline = {'colorscheme': 'gruvbox', }

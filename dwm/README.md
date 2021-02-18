@@ -1,6 +1,6 @@
 # dwm - dynamic window manager
 dwm is an extremely fast, small, and dynamic window manager for X.  
-This is my version of st and you can find the patches I've applied in the AppliedPatches folder.  
+This is my version of dwm and you can find the patches I've applied in the AppliedPatches folder.  
 Visit https://dwm.suckless.org/ for more.
 
 ### Requirements

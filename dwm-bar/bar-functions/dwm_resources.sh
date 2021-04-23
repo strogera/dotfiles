@@ -14,6 +14,20 @@ dwm_resources () {
     # Used and total storage in /home (rounded to 1024B)
     STOUSED=$(df -h | grep '/home$' | awk '{print $3}')
 
+    TEMPSTATUS=$(cat ./tempStatus)
+
+    if [ "$((CPU))" -gt 70 ]; then
+            if ["$TEMPSTATUS" == "0"]; then
+                    dunstify -u low "Cpu is getting hot"
+                    $(echo "1" > ./tempStatus)
+            fi
+            if ["$((CPU))" -gt 100 ]; then
+                    dunstify -u critical "Cpu Overheat"
+            fi
+
+    else
+            $(echo "0" > ./tempStatus)
+    fi
     if [ "$IDENTIFIER" = "unicode" ]; then
         printf "[💻 MEM %s/%s CPU %s\\u00B0]\n" "$MEMUSED" "$MEMTOT" "$CPU"
     else

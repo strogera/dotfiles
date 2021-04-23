@@ -7,6 +7,7 @@
 # Dependencies: NetworkManager, curl
 
 dwm_network () {
+    CONN=$(cat ./connection)
 
     printf "[NET"
     flag=true
@@ -20,7 +21,16 @@ dwm_network () {
 
     if  $flag; then
 	    printf " NONE]"
+      if [ "$CONN" = "1" ]; then
+              dunstify -u low "Disconnected from Network"
+      fi
+      $(echo "0" > ./connection)
+
     else
+      if [ "$CONN" = "0" ]; then
+              dunstify -u low "Connected to Network"
+      fi
+      $(echo "1" > ./connection)
 	    SIGNAL=$(grep "^\s*w" /proc/net/wireless | awk '{ print int($3*100/70) "%" }')
 	    if [ "$IDENTIFIER" = "unicode" ]; then
 		printf "[🌐 %s %s | %s]\n" "$CONNAME" "$PRIVATE" "$PUBLIC"

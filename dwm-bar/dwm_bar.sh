@@ -18,17 +18,16 @@
 #export IDENTIFIER="unicode"
 
 # Import the modules
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_resources.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_battery.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_alsa.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_weather.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_network.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_keyboard.sh"
-. "/home/void/Programs/dwm-bar/bar-functions/dwm_date.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_resources.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_battery.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_alsa.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_network.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_keyboard.sh"
+. "/usr/local/dwm-bar/bar-functions/dwm_date.sh"
 
 # Update dwm status bar every second
 while true
 do
-	xsetroot -name "$(dwm_resources)$(dwm_battery)$(dwm_alsa)$(dwm_network)$(dwm_keyboard)$(dwm_weather)$(dwm_date)"
+	xsetroot -name "$(dwm_resources)$(dwm_battery)$(dwm_alsa)$(dwm_network)$(dwm_keyboard)$(dwm_date)"
     sleep 1
 done

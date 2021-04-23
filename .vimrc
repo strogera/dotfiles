@@ -13,7 +13,7 @@ Plug 'vim-syntastic/syntastic'
 "Plug '907th/vim-auto-save'
 
 " Nice to have
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'], 'on':'MarkdownPreview'}
 "makes surround repeatable
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
@@ -116,6 +116,23 @@ function! StatuslineGit()
         return strlen(l:branchname) > 0?'{'.l:branchname.'}':''
 endfunction
 
+function! WordCount()
+"Based on https://www.vivi.sh/blog/technical/live-wordcount-vim-airline/
+    let position = getpos(".")
+    exe ":silent normal g\<c-g>"
+    let stat = v:statusmsg
+    let s:word_count = 0
+    if stat != '--No lines in buffer--'
+        if mode() == "V"
+            let s:word_count = str2nr(split(stat)[5])
+        else
+            let s:word_count = str2nr(split(stat)[11])
+        endif
+    endif
+    call setpos('.', position)
+    return s:word_count
+endfunction
+
 set laststatus=2
 set statusline=
 set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
@@ -136,7 +153,7 @@ set statusline+=%m                        " modified [+] flag
 set statusline+=%=                          " right align
 set statusline+=%3l/%L\         " line/totalLines
 set statusline+=%-2c\             " column count
-set statusline+=%{wordcount().words}\  " word count
+set statusline+=%{WordCount()}\  " word count
 
 
 set showtabline=2

@@ -1,0 +1,20 @@
+XF86MonBrightnessUp
+	light -A 5 && dunstify -u low "Brightness: " -h int:value:"$(light -G)"
+
+XF86MonBrightnessDown
+	light -U 5 && dunstify -u low "Brightness: " -h int:value:"$(light -G)"
+
+XF86AudioRaiseVolume
+	amixer -q sset Master 3%+ && dunstify -u low "Volume: "  -h int:value:"$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")"
+
+
+XF86AudioLowerVolume
+	amixer -q sset Master 3%- && dunstify -u low "Volume: "  -h int:value:"$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")"
+	
+XF86AudioMute
+	amixer -q sset Master toggle && dunstify -u low "Sound muted/unmuted"
+
+Print
+	scrot -e 'mv $f ~/Downloads' && dunstify -u low "Screenshot saved"
+
+

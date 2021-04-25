@@ -17,4 +17,5 @@ XF86AudioMute
 Print
 	scrot -e 'mv $f ~/Downloads' && dunstify -u low "Screenshot saved"
 
-
+F1
+        dunstify "$(trans "$(xclip -primary -o)" :el -show-dictionary n -show-prompt-message n -show-languages n -show-translation-phonetics n -no-ansi -no-theme -j)"

@@ -1,27 +1,29 @@
 "################# change directory if needed #################
-call plug#begin('~/.vim/plugged')
+set nocompatible "for polyglot
+call plug#begin('~\AppData\Local\nvim\plugged\')
 
 " Essential
 Plug 'tpope/vim-surround'
+" v makes surround repeatable
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
 
 " IDE like functionality
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jiangmiao/auto-pairs'
-Plug 'vim-syntastic/syntastic'
-"Plug 'tpope/vim-fugitive'
-"Plug 'preservim/nerdtree'
+" v use coc for the languages that you have set it up to be used
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for':['python', 'go', 'haskell', 'nim', 'cpp', 'c', 'markdown']} 
+" v syntax highlighting for most languages
+Plug 'sheerun/vim-polyglot'
 "Plug '907th/vim-auto-save'
 
 " Nice to have
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'], 'on':'MarkdownPreview'}
-"makes surround repeatable
-Plug 'tpope/vim-repeat'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 "Plug 'junegunn/limelight.vim'
 
 " Looks
 "colorschemes
 Plug 'https://github.com/srcery-colors/srcery-vim'
+"Plug 'https://github.com/rakr/vim-one'
 "Plug 'https://github.com/nanotech/jellybeans.vim'
 "Plug 'https://github.com/AlessandroYorba/Alduin'
 "Plug 'https://github.com/preservim/vim-colors-pencil'
@@ -32,13 +34,7 @@ Plug 'https://github.com/srcery-colors/srcery-vim'
 "vscode colorscheme
 "Plug 'tomasiser/vim-code-dark'
 
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Needs compatible font https://github.com/ryanoasis/nerd-fonts
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
 " Misc
-"Plug 'tpop/vim-markdown'
 "Plug 'vimwiki/vimwiki'
 "Plug 'vim-scripts/restore_view.vim'
 "Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
@@ -47,29 +43,36 @@ Plug 'https://github.com/srcery-colors/srcery-vim'
 call plug#end()
 
 " Gvim
-"set encoding=utf-8
-"set bs=2 "fixes backspace for gvim
+set encoding=utf-8
+set bs=2 "fixes backspace for gvim
 "set guifont:DejaVu\ Sans\ Mono\ for\ Powerline:h18
-"set guifont:Consolas:h13
+set guifont:Consolas:h13
 "set guifont:Hack:h13
 "set guifont:Hack\ NF:h13
 "set guifont="Consolas Nerd Font Complete:h16"
-"set belloff=all
-"set guioptions-=m  "menu bar
-"set guioptions-=T  "toolbar
-"set guioptions-=r  "scrollbar
-"set guioptions-=L  "scrollbar
-"au GUIEnter * simalt ~x "open in full screen
+set belloff=all
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
+set guioptions-=L  "scrollbar
+au GUIEnter * simalt ~x "open in full screen
 
 
 """""" Vim settings """"""
 
-set noswapfile
+" from https://github.com/neoclide/coc.nvim
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 set nobackup
+set nowritebackup
+
+set noswapfile
 set undodir="~\vimfiles\undodir"
 set undofile
-set backupdir=~/.vimbackup//,/tmp
-set directory=~/.vimbackup//,/tmp
+"set backupdir=~/.vimbackup//,/tmp
+"set directory=~/.vimbackup//,/tmp
 set wildmode=longest,list,full
 set wildignorecase
 set mouse=a
@@ -78,7 +81,8 @@ set expandtab
 set ignorecase
 set incsearch 
 set ttimeoutlen=100
-set clipboard=unnamedplus
+set clipboard=unnamed
+"set clipboard=unnamedplus
 set number
 set autoindent
 set scrolloff=2
@@ -86,6 +90,7 @@ set smarttab
 set autoread
 set background=dark
 set termguicolors
+syntax on
 
 "use spellcheck for .txt files
 au BufNewFile,BufRead *.txt setlocal spell spelllang=en_us,el
@@ -95,14 +100,14 @@ set langmap=ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,�
 
 
 "These are needed in order to use true colors for st
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-"Cursor
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q""]"
+"Cursor for st
+"let &t_ti.="\e[1 q"
+"let &t_SI.="\e[5 q"
+"let &t_EI.="\e[1 q"
+"let &t_te.="\e[0 q""]"
 
 
 """""" Status bar and tab status settings """"""
@@ -146,7 +151,7 @@ set statusline+=%#CursorIM#     " colour
 set statusline+=%#CursorLine#     " colour
 set statusline+=\ %y\                   " file type
 set statusline+=\ %F\                   " Full path 
-set statusline+=%{StatuslineGit()}  " git status
+"set statusline+=%{StatuslineGit()}  " git status
 set statusline+=%#CursorLine#     " colour
 set statusline+=%R                        " readonly flag
 set statusline+=%m                        " modified [+] flag
@@ -191,66 +196,15 @@ set tabline=%!Tabline()
 "let g:auto_save = 1  " enable AutoSave on Vim startup
 "let g:auto_save_silent = 1  " do not display the auto-save notification
 
-"NerdTree
-"let g:netrw_liststyle = 3
-"let g:netrw_banner = 0
-"let g:netrw_browse_split = 4
-"let g:netrw_winsize = 20
-"autocmd BufWinEnter * silent :Lex
-"use nerdfont's chars, needs patched font 
-"let g:NERDTreeGitStatusUseNerdFonts = 1 
-" Start NERDTree and put the cursor back in the other window.
-"autocmd VimEnter * NERDTree | wincmd p
-" Exit Vim if NERDTree is the only window left.
-"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-"    \ quit | endif
-"let g:NERDTreeDirArrowExpandable = '▸'
-"let g:NERDTreeDirArrowCollapsible = '▾'
-" Open the existing NERDTree on each new tab.
-"autocmd BufWinEnter * silent NERDTreeMirror
-
 "coc
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-"syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 
-"vimwiki requires these
-"filetype plugin on
-"syntax on
-"set nocompatible
-
-"vimwiki markdown
-"let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 
 """""" Colorscheme settings """"""
-
-"Gruvbox
-"let g:gruvbox_contrast_dark='hard'
-"let g:gruvbox_improved_strings=1
-
-"let g:PaperColor_Theme_Options = {    'theme': {      'default.dark': {        'transparent_background': 1      }    }  }
-"
-"let g:pencil_neutral_code_bg = 1   " 0=gray (def), 1=normal
-"
-"let g:alduin_Shout_Become_Ethereal = 1
-"
-"let g:jellybeans_overrides = {
-"\    'background': { 'ctermbg': 'none', '256ctermbg': 'none'  },
-"\}
-"if has('termguicolors') && &termguicolors
-"    let g:jellybeans_overrides['background']['guibg'] = 'none'
-"endif
 
 let g:srcery_transparent_background = 1
 colorscheme srcery
@@ -258,4 +212,3 @@ colorscheme srcery
 "highlight only current line number (needs to be after colorscheme)
 highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 set cursorline
-
